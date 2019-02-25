@@ -16,7 +16,16 @@ public class InsurancePolicyCalcBL
 		// TODO: Organize the check of negative and zero values ​​of parameters. 
 		//       For negative and zero parameter values assign fields to a value of zero. 
 		//       Otherwise, assign the parameter values ​​to the fields and call the Calculate() method.
+		if (period <= 0 || power <= 0 || experience <= 0) 
+		{ 
+			totalCost = 0; 
+		} else {
+			this.period = period;
+			this.power = powerInKW(power);
+			this.experience = experienceCoefficient(experience);
 
+			Calculate();
+		}
 	}
 	
 	// Calculation of experience coefficient
