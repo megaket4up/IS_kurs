@@ -53,11 +53,31 @@ public class InsuranceCalcProgramFrame extends JFrame
 		//       Organize an error handling via try/catch mechanism.
 		//       Issue error message via JOptionPane.showMessageDialog() method.
 		//       Use the InsurancePolicyCalcBL class for calculations.
-
-		textPeriod.setText(""); 
-		textPower.setText(""); 
-		textExperience.setText(""); 
-		textCost.setText("");
+		double period = 0;
+		double power = 0; 
+		double experience = 0;
+		
+		// try to execute this code 
+		try {
+			period = Double.parseDouble(textPeriod.getText()); 
+			power = Double.parseDouble(textPower.getText()); 
+			experience = Double.parseDouble(textExperience.getText());
+		}
+		
+		// if throws exception 
+		catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Invalid input. Please, try again.");
+			textPeriod.setText(""); 
+			textPower.setText(""); 
+			textExperience.setText(""); 
+			textCost.setText("");
+			
+			return; 
+		}
+		
+		// creating exemplar of class InsurancePolicyCalcBL
+		InsurancePolicyCalcBL fc = new InsurancePolicyCalcBL(period, power, experience);
+		textCost.setText(String.format(new Locale("ru"), "%(.2f", fc.getCost()));
 	}
 	
 	// component configuration
